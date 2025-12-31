@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para ti ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100svh;
+      font-family: Arial, sans-serif;
+      background: #ffe6e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+
+    .text {
+      font-size: 22px;
+      min-height: 80px;
+      margin-bottom: 20px;
+      white-space: pre-line;
+    }
+
+    button {
+      font-size: 28px;
+      background: none;
+      border: none;
+      margin: 0 20px;
+      cursor: pointer;
+    }
+
+    .heart {
+      font-size: 40px;
+      animation: beat 1.5s infinite;
+    }
+
+    @keyframes beat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <img id="img" src="1.png">
+    <div id="text" class="text"></div>
+
+    <div id="buttons">
+      <button onclick="prev()">←</button>
+      <button onclick="next()">→</button>
+    </div>
+  </div>
+
+  <script>
+    const texts = [
+      "Sé que hace poco que nos conocemos…",
+      "pero en este poco tiempo\nme has hecho sentir cosas…",
+      "cosas que no había sentido nunca.",
+      "Los mensajes bonitos,",
+      "los gestos,",
+      "los besos, los abrazos,\nlas caricias…",
+      "todo eso, contigo,\nse siente diferente.",
+      "Y por eso quería preguntarte algo…",
+      "¿Quieres ser mi novia? ❤️"
+    ];
+
+    let i = 0;
+
+    function update() {
+      document.getElementById("img").src = (i + 1) + ".png";
+      const textDiv = document.getElementById("text");
+
+      if (i === texts.length - 1) {
+        textDiv.innerHTML = texts[i] + "<div class='heart'>💓</div>";
+        document.getElementById("buttons").style.display = "none";
+      } else {
+        textDiv.textContent = texts[i];
+        document.getElementById("buttons").style.display = "block";
+      }
+
+      if (navigator.vibrate) navigator.vibrate(20);
+    }
+
+    function next() {
+      if (i < texts.length - 1) {
+        i++;
+        update();
+      }
+    }
+
+    function prev() {
+      if (i > 0) {
+        i--;
+        update();
+      }
+    }
+
+    update();
+  </script>
+
+</body>
+</html>
